@@ -1,20 +1,12 @@
-import { GreetingWidget } from '@/components/widgets/GreetingWidget';
-import { Container } from '@/components/layout/Container';
-import InteractiveSection from '@/components/InteractiveSection';
-import { getHelloMessage } from '@/lib/hello'
-
 export const metadata = {
-  title: 'Home • MyApp',
+  title: 'Home',
 }
 
 export default async function Home() {
-  const { message } = await getHelloMessage()
-
   return (
-    <Container className="flex flex-col items-center space-y-6">
-      <h1 className="text-5xl font-extrabold">Home</h1>
-      <GreetingWidget greeting={message} />
-      <InteractiveSection greeting={message} />
-    </Container>
+    <section className="flex flex-col items-center space-y-6 mt-8">
+      <h2 className="text-3xl font-semibold">Home</h2>
+      <p>A reusable full-stack foundation for modern web platforms.</p>
+    </section>
   )
 }

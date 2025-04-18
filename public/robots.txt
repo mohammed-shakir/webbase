@@ -1,0 +1,14 @@
+# robots.txt
+
+User-agent: *
+Disallow: /api/
+Disallow: /callback/
+Disallow: /login/
+Disallow: /signup/
+Disallow: /profile/
+Disallow: /admin/
+
+Allow: /
+
+# Sitemap (add when you have one)
+Sitemap: https://yourdomain.com/sitemap.xml
