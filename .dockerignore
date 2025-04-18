@@ -1,0 +1,27 @@
+# Node.js
+node_modules
+npm-debug.log
+yarn.lock
+yarn-error.log
+
+# Next.js build output
+.next
+.next/cache
+
+# Environment files
+.env
+.env.*                      # Covers .env.development, .env.production, etc.
+
+# Editor/system files
+.vscode
+.idea
+.DS_Store
+*.swp                       # Vim temp files
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
