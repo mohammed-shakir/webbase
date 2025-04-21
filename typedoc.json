@@ -1,0 +1,19 @@
+{
+  "entryPoints": ["src"],
+  "exclude": ["**/*.test.ts", "tests"],
+  "out": "docs",
+  "plugin": ["markdown"],
+  "theme": "default",
+  "hideBreadcrumbs": true,
+  "hideInPageTOC": true,
+  "gitRemote": "origin",
+  "gitRevision": "main",
+  "markdown": {
+    "layout": "docs"
+  },
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "includeVersion": true
+}

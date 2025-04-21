@@ -1,5 +1,5 @@
 # STAGE 1 deps
-FROM node:20-slim AS deps
+FROM node:23-slim AS deps
 WORKDIR /usr/src/app
 
 # copy lockfiles first for caching
@@ -7,20 +7,20 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 # STAGE 2 builder
-FROM node:20-slim AS builder
+FROM node:23-slim AS builder
 WORKDIR /usr/src/app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
 # STAGE 3 prod-deps
-FROM node:20-slim AS prod-deps
+FROM node:23-slim AS prod-deps
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
 # STAGE 4 runner
-FROM node:20-slim AS runner
+FROM node:23-slim AS runner
 WORKDIR /usr/src/app
 
 # create a non-root user to run our app

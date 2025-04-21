@@ -1,4 +1,9 @@
-import Form from '@/components/widgets/Form'
+import Form from '@/components/widgets/Form';
+
+export const metadata = {
+  title: 'Feedback',
+  description: 'Send us your feedback',
+};
 
 export default function FeedbackPage() {
   return (
@@ -11,9 +16,14 @@ export default function FeedbackPage() {
         fields={[
           { name: 'name', label: 'Your Name' },
           { name: 'email', label: 'Your Email', type: 'email', required: true },
-          { name: 'message', label: 'Message', type: 'textarea', required: true },
+          {
+            name: 'message',
+            label: 'Message',
+            type: 'textarea',
+            required: true,
+          },
         ]}
       />
     </div>
-  )
+  );
 }

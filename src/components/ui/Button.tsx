@@ -1,5 +1,5 @@
-import clsx from 'clsx'
-import type { ButtonProps } from '@/types/ui'
+import clsx from 'clsx';
+import type { ButtonProps } from '@/types/ui';
 
 export default function Button({
   variant = 'default',
@@ -14,11 +14,11 @@ export default function Button({
         variant === 'default' && 'bg-black text-white hover:bg-gray-800',
         variant === 'outline' && 'border border-gray-300 text-black hover:bg-gray-100',
         variant === 'danger' && 'bg-red-600 text-white hover:bg-red-500',
-        className
+        className,
       )}
       {...props}
     >
       {children}
     </button>
-  )
+  );
 }

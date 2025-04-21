@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from '@/components/layout/Navbar'
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import Navbar from '@/components/layout/Navbar';
+import { ThemeProvider } from 'next-themes';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Web Base",
-  description: "A reusable full-stack foundation for modern web platforms",
+  title: 'Web Base',
+  description: 'A reusable full-stack foundation for modern web platforms',
 };
 
 export default function RootLayout({
@@ -28,8 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 min-h-screen`}
       >
-        <Navbar />
-        <main className="container mx-auto py-8">{children}</main>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <Navbar />
+          <main className="container mx-auto py-8">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
