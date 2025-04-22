@@ -1,30 +1,50 @@
-export const runtime = "nodejs";
+export const runtime = 'nodejs';
 
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { withLogger } from '@/lib/withLogger';
 
-export async function POST(req: Request) {
+/**
+ * @openapi
+ * /feedback:
+ *   post:
+ *     summary:    Submit user feedback
+ *     tags:
+ *       - Feedback
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/FeedbackRequest'
+ *     responses:
+ *       '200':
+ *         description: Acknowledgement of receipt.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/FeedbackResponse'
+ *       '400':
+ *         description: Missing required fields.
+ */
+
+export const POST = withLogger(async (req: { json: () => any }, { log }: any) => {
   try {
     const body = await req.json();
     const { name, email, message } = body;
 
     if (!email || !message) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 },
-      );
+      log.warn('Missing required fields', { body });
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    console.log("Feedback received:", { name, email, message });
+    log.info({ name, email, message }, 'Feedback received');
 
     return NextResponse.json({
       success: true,
-      message: "Thank you for your feedback!",
+      message: 'Thank you for your feedback!',
     });
   } catch (err) {
-    console.error("Feedback error:", err);
-    return NextResponse.json(
-      { error: "Something went wrong" },
-      { status: 500 },
-    );
+    log.error({ err }, 'Error processing feedback');
+    return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
-}
+});

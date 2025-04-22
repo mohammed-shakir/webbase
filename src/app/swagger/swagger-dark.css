@@ -1,0 +1,26 @@
+.execute-wrapper,
+.opblock-description-wrapper,
+.swagger-ui .info,
+.swagger-ui .scheme-container,
+.swagger-ui .opblock-summary,
+.swagger-ui .topbar,
+.swagger-ui {
+  background-color: rgb(75, 75, 75) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.swagger-ui .response-col_status,
+.swagger-ui table thead tr td,
+.swagger-ui .opblock-description-wrapper p,
+.swagger-ui .tab li button.tablinks,
+.swagger-ui .info p,
+.swagger-ui a.nostyle,
+.opblock-summary-description,
+.swagger-ui .info .title {
+  color: rgb(255, 255, 255) !important;
+}
+
+.swagger-ui .opblock-body pre,
+.swagger-ui .responses-wrapper {
+  background-color: #222 !important;
+}
