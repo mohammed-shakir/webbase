@@ -1,18 +1,13 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import tsParser from '@typescript-eslint/parser';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import importPlugin from 'eslint-plugin-import';
-import tailwindcss from 'eslint-plugin-tailwindcss';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const compat = new FlatCompat({ baseDirectory: __dirname });
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
 
 export default [
   ...compat.extends(
@@ -24,34 +19,34 @@ export default [
     'plugin:import/recommended',
     'plugin:tailwindcss/recommended',
     'next/core-web-vitals',
+    'next/typescript',
     'prettier',
   ),
 
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
-    ignores: ['node_modules/**', '.next/**', 'out/**'],
+    files: ['*.ts', '*.tsx'],
+    ignores: ['node_modules/**/*'],
     languageOptions: {
-      parser: tsParser,
+      parser: '@typescript-eslint/parser',
       parserOptions: {
+        project: './tsconfig.json',
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
         ecmaFeatures: { jsx: true },
       },
     },
     plugins: {
-      '@typescript-eslint': tsPlugin,
-      react: reactPlugin,
-      'react-hooks': reactHooks,
-      'jsx-a11y': jsxA11y,
-      import: importPlugin,
-      tailwindcss,
+      '@typescript-eslint': '@typescript-eslint',
+      react: 'react',
+      'react-hooks': 'react-hooks',
+      'jsx-a11y': 'jsx-a11y',
+      import: 'import',
+      tailwindcss: 'tailwindcss',
     },
     settings: {
       react: { version: 'detect' },
       'import/resolver': {
-        typescript: {},
+        node: { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
       },
     },
     rules: {
@@ -63,10 +58,7 @@ export default [
       'import/order': [
         'warn',
         {
-          groups: [
-            ['builtin', 'external'],
-            ['internal', 'parent', 'sibling', 'index'],
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
