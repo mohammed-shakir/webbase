@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
+import { auth0 } from '@/lib/auth0';
 
-export function middleware(req: NextRequest) {
-  const res = NextResponse.next();
-  const h = res.headers;
+export async function middleware(request: NextRequest) {
+  const response = await auth0.middleware(request);
+  const h = response.headers;
 
   h.set('X-DNS-Prefetch-Control', 'on');
   h.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
@@ -14,9 +15,9 @@ export function middleware(req: NextRequest) {
     h.set('X-Frame-Options', 'DENY');
   }
 
-  return res;
+  return response;
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|robots.txt).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
 };

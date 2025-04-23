@@ -1,5 +1,6 @@
 'use client';
 
+import { useUser } from '@auth0/nextjs-auth0';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
@@ -13,6 +14,7 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { user, isLoading } = useUser();
 
   return (
     <nav className="mb-8 border-b border-gray-200 py-4">
@@ -20,14 +22,14 @@ export default function Navbar() {
         <Link href="/">
           <Image
             src="/assets/images/web-app-manifest-192x192.png"
-            alt="Company Logo"
+            alt="Logo"
             width={40}
             height={40}
             priority
           />
         </Link>
 
-        <ul className="flex gap-6 text-sm">
+        <ul className="flex gap-6 text-sm flex-1">
           {navItems.map(item => (
             <li key={item.href}>
               <Link
@@ -42,6 +44,23 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+        <div>
+          {isLoading ? (
+            <span>Loading…</span>
+          ) : !user ? (
+            <a href="/auth/login" className="underline">
+              Login
+            </a>
+          ) : (
+            <>
+              <span className="mr-4">Hello, {user.name}</span>
+              <a href="/auth/logout" className="underline">
+                Logout
+              </a>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

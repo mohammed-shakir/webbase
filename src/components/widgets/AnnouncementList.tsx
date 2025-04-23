@@ -1,19 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Announcement } from '@/types/announcement';
+import { useAnnouncements } from '@/hooks/useAnnouncements';
 
 export function AnnouncementList() {
-  const [items, setItems] = useState<Announcement[]>([]);
+  const { items, loading, error } = useAnnouncements();
 
-  useEffect(() => {
-    fetch('/api/announcements')
-      .then(res => res.json())
-      .then(setItems)
-      .catch(console.error);
-  }, []);
-
-  if (!items.length) return <p>Loading announcements…</p>;
+  if (loading) return <p>Loading announcements…</p>;
+  if (error) return <p className="text-red-500">Failed to load: {error}</p>;
 
   return (
     <ul className="space-y-4">

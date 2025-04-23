@@ -45,7 +45,7 @@ async function main() {
     ],
   });
 
-  console.log('✅ Seeded initial data.');
+  console.log('Seeded initial data.');
 }
 
 main()
