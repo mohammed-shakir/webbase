@@ -9,7 +9,6 @@ Before you begin, make sure the following tools are installed:
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
 - [Docker](https://www.docker.com/)
-- [Google Cloud CLI (gcloud)](https://cloud.google.com/sdk)
 - Environment variables (`.env` file) — see `.env.example`
 
 ## Getting Started
@@ -62,11 +61,11 @@ Manage your database and Prisma client with:
 # Generate Prisma client
 npx prisma generate
 
-# Run migrations (development)
-npx prisma migrate dev --name init
+# Run migrations
+npx dotenv -e .env.local -- npx prisma migrate dev --name init
 
 # Seed the database
-npx prisma db seed
+dotenv -e .env.local -- prisma db seed
 
 # Open Prisma Studio (GUI)
 npx prisma studio
@@ -74,11 +73,63 @@ npx prisma studio
 
 ## Running Tests
 
-TODO
+For unit tests and integration tests:
 
-## Deploying to GCP
+```bash
+npm run test:unit-integration
+```
 
-TODO
+For end-to-end tests:
+
+```bash
+npm run test:e2e
+```
+
+For all tests:
+
+```bash
+npm run test
+```
+
+## Linting and Formatting
+
+For linting with next.js:
+
+```bash
+npm run lint
+```
+
+For linting with eslint:
+
+```bash
+npm run lint:eslint
+```
+
+For checking formatting with prettier:
+
+```bash
+npm run format:check
+```
+
+For formatting with prettier:
+
+```bash
+npm run format
+```
+
+## GCP
+
+Ideas for things to add to the GCP project:
+
+- IAM Roles – Access control
+- Google Cloud Run – App hosting (frontend & backend)
+- Google Cloud SQL – Managed PostgreSQL database
+- Google Cloud Storage – File uploads and static assets
+- Google Secret Manager – Secure environment variables
+- Google Cloud Build – CI/CD automation
+- Google Cloud Logging – Centralized logging
+- Google Cloud Monitoring – App performance & uptime
+- Google Analytics – Website traffic and usage stats
 
 ## License
 

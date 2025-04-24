@@ -1,7 +1,13 @@
-import type { NextConfig } from 'next';
 import { withSentryConfig } from '@sentry/nextjs';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    resolveAlias: {
+      'next/dist/compiled/browserslist': require.resolve('browserslist'),
+    },
+  },
+
   async headers() {
     return [
       {
@@ -18,6 +24,26 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+  },
+
+  webpack(config) {
+    config.ignoreWarnings = [
+      ...(config.ignoreWarnings ?? []),
+      {
+        module: /webpack\.cache\.PackFileCacheStrategy/,
+        message: /Serializing big strings/,
+      },
+    ];
+
+    config.infrastructureLogging = { level: 'error' };
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = {
+      ...(config.resolve.alias ?? {}),
+      'next/dist/compiled/browserslist': require.resolve('browserslist'),
+    };
+
+    return config;
   },
 };
 

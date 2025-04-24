@@ -1,5 +1,5 @@
-import pino from 'pino';
 import { createGcpLoggingPinoConfig } from '@google-cloud/pino-logging-gcp-config';
+import pino from 'pino';
 
 const isGcp = Boolean(process.env.GOOGLE_CLOUD_PROJECT);
 const isWorkerSupported = typeof Worker !== 'undefined';
@@ -11,7 +11,6 @@ const baseConfig = {
   },
 };
 
-// Declare logger variable
 export const logger = isGcp
   ? pino(createGcpLoggingPinoConfig(baseConfig))
   : pino({

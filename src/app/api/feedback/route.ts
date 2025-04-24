@@ -1,6 +1,8 @@
 export const runtime = 'nodejs';
 
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
+import type { Logger } from 'pino';
+
 import { withLogger } from '@/lib/withLogger';
 
 /**
@@ -27,7 +29,7 @@ import { withLogger } from '@/lib/withLogger';
  *         description: Missing required fields.
  */
 
-export const POST = withLogger(async (req: { json: () => any }, { log }: any) => {
+export const POST = withLogger(async (req: NextRequest, { log }: { log: Logger }) => {
   try {
     const body = await req.json();
     const { name, email, message } = body;

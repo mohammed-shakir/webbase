@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from 'swagger-ui-dist';
 import 'swagger-ui-dist/swagger-ui.css';
+
 import './swagger-dark.css';
 
 export default function DocsPage() {

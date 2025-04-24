@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function FeedbackPage() {
   return (
-    <div className="max-w-xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-semibold mb-6">Send Us Feedback</h1>
+    <div className="mx-auto max-w-xl px-4 py-12">
+      <h1 className="mb-6 text-3xl font-semibold">Send Us Feedback</h1>
 
       <Form
         endpoint="/api/feedback"

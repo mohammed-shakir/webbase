@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+import { captureRouterTransitionStart } from '@sentry/nextjs';
 
 export function register() {
   Sentry.init({
@@ -8,4 +9,4 @@ export function register() {
   });
 }
 
-export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+export const onRouterTransitionStart = captureRouterTransitionStart;

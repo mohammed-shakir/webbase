@@ -1,9 +1,11 @@
+import { Auth0Provider } from '@auth0/nextjs-auth0';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import Navbar from '@/components/layout/Navbar';
 import { ThemeProvider } from 'next-themes';
-import { Auth0Provider } from '@auth0/nextjs-auth0';
+
+import Navbar from '@/components/layout/Navbar';
+
+import './globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,7 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 min-h-screen`}
+        className={`
+          ${geistSans.variable}
+          ${geistMono.variable}
+          min-h-screen
+          antialiased
+        `}
       >
         <Auth0Provider>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>

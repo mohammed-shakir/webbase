@@ -1,4 +1,6 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
+import type { Logger } from 'pino';
+
 import { prisma } from '@/lib/prisma';
 import { withLogger } from '@/lib/withLogger';
 
@@ -21,7 +23,7 @@ import { withLogger } from '@/lib/withLogger';
  *                 $ref: '#/components/schemas/Announcement'
  */
 
-export const GET = withLogger(async (req: any, { log }: any) => {
+export const GET = withLogger(async (req: NextRequest, { log }: { log: Logger }) => {
   const announcements = await prisma.announcement.findMany({
     orderBy: { createdAt: 'desc' },
   });

@@ -1,7 +1,8 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { AnnouncementList } from '@/components/widgets/AnnouncementList';
+import React from 'react';
 import { vi } from 'vitest';
+
+import { AnnouncementList } from '@/components/widgets/AnnouncementList';
 
 describe('AnnouncementList (integration)', () => {
   beforeEach(() => {

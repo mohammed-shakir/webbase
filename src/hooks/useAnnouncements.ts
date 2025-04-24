@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { Announcement } from '@/types/announcement';
 
 export function useAnnouncements() {
@@ -13,8 +14,12 @@ export function useAnnouncements() {
         if (!res.ok) throw new Error(`Error ${res.status}`);
         const data: Announcement[] = await res.json();
         setItems(data);
-      } catch (err: any) {
-        setError(err.message || 'Unknown error');
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Unknown error');
+        }
       } finally {
         setLoading(false);
       }

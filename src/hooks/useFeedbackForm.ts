@@ -25,9 +25,13 @@ export function useFeedbackForm(endpoint: string) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Submission failed');
       setSuccess(true);
-      setForm({}); // reset
-    } catch (err: any) {
-      setError(err.message || 'Unexpected error');
+      setForm({});
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Unexpected error');
+      }
     } finally {
       setLoading(false);
     }

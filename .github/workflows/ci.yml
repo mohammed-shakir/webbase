@@ -24,8 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run full lint check
+        run: npm run lint:strict
+
+      - name: Run TypeScript typecheck
+        run: npm run typecheck
+
       - name: Build Next.js
         run: npm run build
 
       - name: Run all tests
-        run: npx vitest run --config vitest.config.mjs
+        run: npm run test
