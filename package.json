@@ -26,7 +26,7 @@
     "test:unit-integration": "vitest run --config vitest.config.mjs",
     "test:e2e": "playwright test",
     "test:watch": "vitest --ui",
-    "validate": "npm-run-all -s lint lint:eslint typecheck build test"
+    "validate": "npm-run-all -s lint lint:eslint typecheck format:check build test"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.4.2",
